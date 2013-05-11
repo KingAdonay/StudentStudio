@@ -66,12 +66,14 @@ namespace StudentStudio
                 {
                     BinaryFormatter BinaryFormatter = new BinaryFormatter();
                     string Name = P.ToLower() + ".dat";
-                    FileStream FileStream = new FileStream(Name, FileMode.OpenOrCreate);
-                    var Object = BinaryFormatter.Deserialize(FileStream);
-                    FileStream.Close();
+                    if (File.Exists(Name)) 
+                    {
+	                    FileStream FileStream = new FileStream(Name, FileMode.OpenOrCreate);
+	                    var Object = BinaryFormatter.Deserialize(FileStream);
+	                    FileStream.Close();
 
-                    FieldInfo.SetValue(this, Object);
-
+	                    FieldInfo.SetValue(this, Object);
+                    }
                 }
             }
         }
